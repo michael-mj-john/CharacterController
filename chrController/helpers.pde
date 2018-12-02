@@ -8,9 +8,10 @@ static final int MOVING_RIGHT = 1;
 static final int MOVING_LEFT = 2;
 
 //a few globals
-boolean jumpPressed = false;
-boolean jumpAllowed = true;
+
 int leftRight;
+
+boolean debug = false; // for showing framerate
 
 //helper function
 int signOf( float input ) {
