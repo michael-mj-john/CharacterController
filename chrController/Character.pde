@@ -25,7 +25,7 @@ class PlayerCharacter {
   }
   
   void update() {
-    if( keyPressed ) { //<>//
+    if( keyPressed ) {
       if( key == 'a' ) {
         leftRight = MOVING_LEFT;
       }

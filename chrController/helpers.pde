@@ -8,7 +8,7 @@ static final int MOVING_RIGHT = 1;
 static final int MOVING_LEFT = 2;
 
 //a few globals
-boolean jumpPressed = true;
+boolean jumpPressed = false;
 boolean jumpAllowed = true;
 int leftRight;
 
