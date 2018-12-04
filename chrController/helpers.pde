@@ -23,9 +23,8 @@ int signOf( float input ) {
   return -1;
 }
 
-// this is all currently a mess. Do not push. 
-     
-boolean collides( int chrPosX, int chrPosY, int hw ) { 
+// AABB collision test against platforms
+ boolean collides( int chrPosX, int chrPosY, int hw ) { 
      for( int i=0; i<platforms.size(); i++ ) {
           Platform p = platforms.get(i);
           if( abs(chrPosX - p.centroid.x) > hw + p.halfX ) { continue; }

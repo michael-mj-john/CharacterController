@@ -66,19 +66,7 @@ class PlayerCharacter {
     if( position.x > (width - chrSize ) ) { position.x = width - chrSize; }
     if( position.x < 0  ) { position.x = 0; }    
   }
-  
-  // isGrounded is a very basic test here, which only works because the character is
-  // only on the bottom of the screen. A more sophisticated isGrounded routine would be
-  // needed for a real game
-  boolean isGrounded() {
-     if( position.y >= height - chrSize ) {
-       position.y = height - chrSize ;
-       velocity.y = 0;
-       return true;
-     }
-     return false;
-  }
-  
+    
   // this is the code that executes if the character is running or standing on a surface
   void updateGrounded() {
     if( jumpPressed ) {  
