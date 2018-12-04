@@ -6,13 +6,8 @@ static final int JUMPING = 2;
 static final int FALLING = 3;
 static final int DOUBLEJUMP = 4;
 static final int FALLFROMDOUBLEJUMP = 5;
-static final int MOVING_RIGHT = 1;
-static final int MOVING_LEFT = 2;
 
 //a few globals
-
-int leftRight;
-
 boolean debug = false; // for showing framerate
 
 //helper function
@@ -31,7 +26,7 @@ int signOf( float input ) {
           if( abs(chrPosY - p.centroid.y) > hw + p.halfY ) { continue; }
           else{ 
                if( chrPosY < p.centroid.y ) {
-                    player.state = GROUNDED; // this has no business being here. bad FSM. bad bad!
+                    player.isGrounded = true;
                }
                return true; 
           }

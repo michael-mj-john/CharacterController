@@ -10,6 +10,7 @@ class PlayerCharacter {
   PVector doubleJumpForce;
   PVector airAccel; // use a different steering value when in the air
   PVector groundAccel; // default acceleration left/right
+  boolean isGrounded;
   float xClamp; // max speed
   int state;  // see "helpers" file for list of possible states
   boolean jumpPressed = false;
@@ -27,7 +28,6 @@ class PlayerCharacter {
     groundAccel = new PVector(.4, 0 );
     airAccel = new PVector(.3,0);
     xClamp = 4;
-    leftRight = 0; //this tracks whether 'a' or 'd' is being held down
   }
   
   void update() {
@@ -78,11 +78,9 @@ class PlayerCharacter {
     // move left/right
     if( keyPressed ) {
       if( key == 'a' ) {
-        if( velocity.x > 0 ) { velocity.x = 0; }
         if( velocity.x >= -xClamp ) velocity.x -= groundAccel.x;
       }
       if( key == 'd' ) {
-        if( velocity.x < 0 ) { velocity.x = 0; }
         if( velocity.x <= xClamp ) velocity.x += groundAccel.x;
       }
     }
@@ -123,13 +121,21 @@ class PlayerCharacter {
   }
   
   void updateFallingDoubleJump() {
-       
+       airSteer();
+       if( isGrounded ) {
+         velocity.y = 0;
+         key = 's';
+         state = GROUNDED;
+         jumpPressed = false;
+         velocity.x = min( velocity.x, 4.0 );
+         return;
+      }   
   }
   // falling updater. Importantly, it manages whether the jump key will be honored
   // during the fall.
   void updateFalling() {
     // if player landed, e.g. on a platform
-    if( isGrounded() ) {
+    if( isGrounded ) {
        velocity.y = 0;
        key = 's';
        state = GROUNDED;
@@ -138,7 +144,7 @@ class PlayerCharacter {
        return;
     }
     airSteer(); 
-    if( jumpPressed  ) {
+    if( jumpPressed) {
         velocity.y = 0;
         velocity.add( doubleJumpForce ); 
         jumpPressed = false;
